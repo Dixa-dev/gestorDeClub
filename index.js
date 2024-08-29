@@ -1,5 +1,5 @@
 import express from 'express';
-import jugadoresRoutes from "./routes/jugadores.routes.js"
+import jugadoresRoutes from "./src/routes/jugadores.routes.js"
 
 
 const app = express();
