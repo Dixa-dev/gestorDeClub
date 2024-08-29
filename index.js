@@ -1,7 +1,8 @@
 import express from 'express';
 import jugadoresRoutes from "./src/routes/jugadores.routes.js"
+import { config } from 'dotenv';
 
-
+config()
 const app = express();
 
 
