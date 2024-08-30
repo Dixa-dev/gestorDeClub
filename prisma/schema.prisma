@@ -24,25 +24,39 @@ model Jugadores {
   celular         String 
   celularEmergencia String
   fechaNacimiento String
-  categoria Categorias?   
+  categoria Categorias  
   cuotas Cuotas[]
 
   @@map("jugadores")
 }
 
-model Categorias {
-  id           Int        @id @default(autoincrement())
-  categoria    String
-  jugador      Jugadores @relation(fields: [jugadorId], references: [id],onDelete: Cascade, onUpdate: Cascade)
-  jugadorId    Int       @unique
+// model Categorias {
+//   id           Int        @id @default(autoincrement())
+//   categoria    String
+//   jugador      Jugadores @relation(fields: [jugadorId], references: [id],onDelete: Cascade, onUpdate: Cascade)
+//   jugadorId    Int       @unique
 
-  @@map("categorias")
+//   @@map("categorias")
+// }
+
+enum Categorias{
+  C7
+  C9
+  C11
+  C13
+  C15
+  C17
+  C19
+  C20
+  PRIMERA
+  SENIOR
+  VETERANO
 }
 
 model Cuotas {
   id          Int        @id @default(autoincrement())
   mes         String
-  monto       String
+  monto       Int
   fechaPago   String
   jugador     Jugadores? @relation(fields: [jugadorId], references: [id],onDelete: Cascade, onUpdate: Cascade) 
   jugadorId   Int       

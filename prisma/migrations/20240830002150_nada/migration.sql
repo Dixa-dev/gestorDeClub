@@ -1,3 +1,6 @@
+-- CreateEnum
+CREATE TYPE "Categorias" AS ENUM ('C7', 'C9', 'C11', 'C13', 'C15', 'C17', 'C19', 'C20', 'PRIMERA', 'SENIOR', 'VETERANO');
+
 -- CreateTable
 CREATE TABLE "jugadores" (
     "id" SERIAL NOT NULL,
@@ -7,24 +10,16 @@ CREATE TABLE "jugadores" (
     "celular" TEXT NOT NULL,
     "celularEmergencia" TEXT NOT NULL,
     "fechaNacimiento" TEXT NOT NULL,
+    "categoria" "Categorias" NOT NULL,
 
     CONSTRAINT "jugadores_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "categorias" (
-    "id" SERIAL NOT NULL,
-    "categoria" TEXT NOT NULL,
-    "jugadorId" INTEGER NOT NULL,
-
-    CONSTRAINT "categorias_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "cuotas" (
     "id" SERIAL NOT NULL,
     "mes" TEXT NOT NULL,
-    "monto" TEXT NOT NULL,
+    "monto" INTEGER NOT NULL,
     "fechaPago" TEXT NOT NULL,
     "jugadorId" INTEGER NOT NULL,
     "comprobantePago" TEXT NOT NULL,
@@ -34,12 +29,6 @@ CREATE TABLE "cuotas" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "jugadores_dni_key" ON "jugadores"("dni");
-
--- CreateIndex
-CREATE UNIQUE INDEX "categorias_jugadorId_key" ON "categorias"("jugadorId");
-
--- AddForeignKey
-ALTER TABLE "categorias" ADD CONSTRAINT "categorias_jugadorId_fkey" FOREIGN KEY ("jugadorId") REFERENCES "jugadores"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "cuotas" ADD CONSTRAINT "cuotas_jugadorId_fkey" FOREIGN KEY ("jugadorId") REFERENCES "jugadores"("id") ON DELETE CASCADE ON UPDATE CASCADE;

@@ -4,10 +4,9 @@ const prisma = new PrismaClient();
 
 export const obtenerTodosJugadores = async (req, res) => {
     const jugadores = await prisma.jugadores.findMany({
-      include: {
-        categoria: true,
-      },
+     
     });
+   
     res.json(jugadores);
   }
 
@@ -17,10 +16,8 @@ export const obtenerTodosJugadores = async (req, res) => {
     const jugador = await prisma.jugadores.findUnique({
       where: {
         id: Number(id),
-      },
-      include: {
-        categoria: true,
-      },
+      }
+      
     });
     if (!jugador) {
       return res.status(404).json({ message: "Jugador no encontrado" });
@@ -38,7 +35,7 @@ export const obtenerTodosJugadores = async (req, res) => {
         celular,
         fechaNacimiento,
         celularEmergencia,
-        categoria,
+        categoria
       } = req.body;
     try {
       const jugadores = await prisma.jugadores.findUnique({
@@ -52,17 +49,13 @@ export const obtenerTodosJugadores = async (req, res) => {
         
         const jugador = await prisma.jugadores.create({
           data: {
-            nombre,
+            nombre:nombre,
             apellido,
             dni,
             celular,
             fechaNacimiento,
             celularEmergencia,
-            categoria: {
-              create: {
-                categoria:categoria
-              },
-            },
+            categoria
           },
         });
 
