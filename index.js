@@ -1,7 +1,15 @@
+<<<<<<< HEAD
 import express from "express";
 import jugadoresRoutes from "./src/routes/jugadores.routes.js";
 import cors from "cors"
 
+=======
+import express from 'express';
+import jugadoresRoutes from "./src/routes/jugadores.routes.js"
+import { config } from 'dotenv';
+
+config()
+>>>>>>> 90d67199f558fa6f500ab1714874cad55bf39841
 const app = express();
 
 app.use(cors());
