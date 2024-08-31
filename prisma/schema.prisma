@@ -56,11 +56,23 @@ enum Categorias{
 model Cuotas {
   id          Int        @id @default(autoincrement())
   mes         String
-  monto       Int
+  monto       Int @unique
   fechaPago   String
   jugador     Jugadores? @relation(fields: [jugadorId], references: [id],onDelete: Cascade, onUpdate: Cascade) 
   jugadorId   Int       
-  comprobantePago String
+  comprobantePago String @unique
   
   @@map("cuotas")
+}
+
+model Administracion {
+  
+  id Int @id @default(autoincrement())
+  itemGastos String[]
+  monto Int
+  recaudacionEntadas Int
+  recaudacionEstacionamiento Int
+
+
+  @@map("administracion")
 }

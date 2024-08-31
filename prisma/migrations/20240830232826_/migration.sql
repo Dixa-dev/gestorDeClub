@@ -27,6 +27,17 @@ CREATE TABLE "cuotas" (
     CONSTRAINT "cuotas_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "administracion" (
+    "id" SERIAL NOT NULL,
+    "itemGastos" TEXT[],
+    "monto" INTEGER NOT NULL,
+    "recaudacionEntadas" INTEGER NOT NULL,
+    "recaudacionEstacionamiento" INTEGER NOT NULL,
+
+    CONSTRAINT "administracion_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "jugadores_dni_key" ON "jugadores"("dni");
 
