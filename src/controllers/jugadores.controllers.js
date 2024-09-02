@@ -4,6 +4,10 @@ const prisma = new PrismaClient();
 
 export const obtenerTodosJugadores = async (req, res) => {
     const jugadores = await prisma.jugadores.findMany({
+      
+      include:{
+        cuotas:true,
+      }
      
     });
    
