@@ -16,6 +16,9 @@ export const obtenerTodosJugadores = async (req, res) => {
     const jugador = await prisma.jugadores.findUnique({
       where: {
         id: Number(id),
+      },
+      include:{
+        cuotas:true,
       }
       
     });
@@ -37,6 +40,8 @@ export const obtenerTodosJugadores = async (req, res) => {
         celularEmergencia,
         categoria
       } = req.body;
+  
+      
     try {
       const jugadores = await prisma.jugadores.findUnique({
         where: {
@@ -58,7 +63,7 @@ export const obtenerTodosJugadores = async (req, res) => {
             categoria
           },
         });
-
+       
 
          return res.json(jugador);
     } catch (error) {
@@ -75,24 +80,22 @@ export const actualizarJugador = async (req, res) => {
     try {
       const {id} = req.params;
 
-      if (!jugadorId) {
+      if (!id) {
         return res.status(404).json({ message: 'Id del jugador no válido' });
       }
       
-      const actualizarJugador = await prisma.jugadores.update({
+      const actualizarElJugador = await prisma.jugadores.update({
         where:{
-          id: parseInt(id)
+          id: Number(id)
         },
-        data: req.body
+        data: req.body,
       })
-      if (!actualizarJugador) {
-        return res.status(404).json({ message: 'Jugador no encontrado' });
-        
-      }
+     
       } catch (error) {
         return res.status(404).json({massage:'jugador no actualizado'})
       }
-      return res.json(actualizarJugador);
+      return res.json(actualizarJugador)
+     
     }
 
 
@@ -103,8 +106,7 @@ export const actualizarJugador = async (req, res) => {
     try {
      
       const {id} = req.params
-      console.log(id);
-      
+  
 
       if (!id) {
         return res.status(404).json({ message: 'Id del jugador no válido' });
@@ -115,8 +117,10 @@ export const actualizarJugador = async (req, res) => {
         where: {
           id: Number(id),
         },
-        data: req.body,
-      });
+        
+       
+      }
+    );
       if (!eliminarJugador) {
         return res.status(404).json({ message: 'Jugador no encontrado' });
       }
