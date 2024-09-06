@@ -9,74 +9,68 @@ generator client {
   previewFeatures = ["driverAdapters"]
 }
 
-
 datasource db {
   provider = "postgres"
   url      = env("DATABASE_URL")
 }
 
-
 model Jugadores {
-  id              Int        @id @default(autoincrement())
-  nombre          String
-  apellido        String
-  dni             String @unique
-  celular         String 
+  id                Int        @id @default(autoincrement())
+  nombre            String
+  apellido          String
+  dni               String     @unique
+  celular           String
   celularEmergencia String
-  fechaNacimiento String
-  categoria Categorias  
-  cuotas Cuotas[]
+  fechaNacimiento   String
+  categoria         Categorias
+  cuotas            Cuotas[]
 
   @@map("jugadores")
 }
 
-
-
-
 model Cuotas {
-  id          Int        @id @default(autoincrement())
-  mes         String
-  monto       Int 
-  fechaPago   String
-  jugador     Jugadores? @relation(fields: [jugadorId], references: [id],onDelete: Cascade, onUpdate: Cascade) 
-  jugadorId   Int       
-  comprobantePago String @unique
+  id              Int        @id @default(autoincrement())
+  mes             String
+  monto           Int
+  fechaPago       String
+  jugador         Jugadores? @relation(fields: [jugadorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  jugadorId       Int
+  comprobantePago String     @unique
   
-  
+
   @@map("cuotas")
 }
 
 model Administracion {
-  
-  id Int @id @default(autoincrement())
-  recaudacionEntadas Int
+  id                         Int      @id @default(autoincrement())
+  titulo                     String
+  recaudacionEntadas         Int
   recaudacionEstacionamiento Int
-  gastos Gastos[]
+  gastos                     Gastos[]
 
   @@map("administracion")
 }
 
 model Gastos {
-  id              Int            @id @default(autoincrement())
-  descripcion     String    
-  monto           Int
-  administracion  Administracion @relation(fields: [administracionId], references: [id])
+  id               Int            @id @default(autoincrement())
+  descripcion      String
+  monto            Int
+  administracion   Administracion? @relation(fields: [administracionId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   administracionId Int
 
   @@map("gastos")
 }
 
 model Usuarios {
-
-  id              Int        @id @default(autoincrement())
-  nombre          String
-  password       String  
-  role UsuarioRoles 
+  id       Int          @id @default(autoincrement())
+  nombre   String
+  password String
+  role     UsuarioRoles
 
   @@map("usuarios")
 }
 
-enum Categorias{
+enum Categorias {
   C7
   C9
   C11
@@ -90,9 +84,8 @@ enum Categorias{
   VETERANO
 }
 
-
-enum UsuarioRoles{
+enum UsuarioRoles {
   ADMIN
-  COBRADOR 
+  COBRADOR
   SUPER
 }

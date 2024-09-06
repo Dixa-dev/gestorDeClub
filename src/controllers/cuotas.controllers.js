@@ -19,6 +19,7 @@ console.log(req.body);
         ]
       }
     })
+console.log(cuotas);
 
    
     const cuotaCreada = await prisma.cuotas.create({
@@ -71,6 +72,7 @@ export const obtenerCuotaPorId = async (req, res) => {
   }
   res.status(200).json(cuotas);
 }
+
 
 
 

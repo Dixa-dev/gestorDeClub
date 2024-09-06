@@ -5,6 +5,7 @@ import cuotasRoutes from "./src/routes/cuotas.routes.js"
 import sumaRoutes from "./src/routes/suma.routes.js"
 import adminRoutes from "./src/routes/administrador.routes.js"
 import usuariosRoutes from "./src/routes/user.routes.js"
+import gastosRoutes from "./src/routes/gastos.routes.js"
 import { config } from 'dotenv';
 
 import {  verificarRole } from './src/middlewares/rutasProtegidas.js';
@@ -24,6 +25,7 @@ app.use("/api/usuarios",usuariosRoutes);
 app.use("/api/jugadores",jugadoresRoutes);
 app.use("/api/cuotas",cuotasRoutes);
 app.use("/api/administracion",adminRoutes);
+app.use("/api/gastos",gastosRoutes)
 app.use("/api/suma", sumaRoutes);
 
 app.get("/", (req, res) => {

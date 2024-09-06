@@ -4,9 +4,9 @@ const prisma = new PrismaClient();
 export const obtenerUsuarios = async (req, res) => {
   try {
     const usuarios = await prisma.usuarios.findMany();
-    res.json(usuarios)
+    res.json(usuarios);
   } catch (error) {}
-  return res.status(200)
+  return res.status(200);
 };
 
 export const obtenerUsuariosId = async (req, res) => {
@@ -38,7 +38,6 @@ export const login = async (req, res) => {
         nombre: nombre,
       },
     });
-    
 
     if (!usuario) {
       return res.status(404).json({ message: "Usuario no encontrado login" });
@@ -47,11 +46,11 @@ export const login = async (req, res) => {
     if (usuario.nombre === nombre && usuario.password === password) {
       return res.status(200).json({ message: "login ok" });
     } else {
-      return res.status(401).json({ message: "Credenciales incorrectas login" });
+      return res
+        .status(401)
+        .json({ message: "Credenciales incorrectas login" });
     }
-    
   } catch (error) {
     return res.status(500).json({ message: "Error del servidor login" });
   }
-  
 };
