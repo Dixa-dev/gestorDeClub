@@ -64,20 +64,19 @@ export const administraciones = async (req, res) => {
 
 const administracion = await prisma.administracion.findUnique({
   where: {
-    id: 1, // El ID de la administración que quieres consultar
+    id: 3, 
   },
   include: {
-    gastos: true, // Incluir todos los gastos relacionados con la administración
+    gastos: true, 
   },
 });
 
-// Sumar la recaudación de entradas y estacionamiento
+
 const recaudacionTotal = administracion.recaudacionEntadas + administracion.recaudacionEstacionamiento;
 
-// Sumar todos los montos de gastos
+
 const totalGastos = administracion.gastos.reduce((acc, gasto) => acc + gasto.monto, 0);
 
-// Realizar la resta final
 const resultadoFinal = recaudacionTotal - totalGastos;
 
 console.log('El resultado final es:', resultadoFinal,'de la recaudacion ',administracion.titulo);
