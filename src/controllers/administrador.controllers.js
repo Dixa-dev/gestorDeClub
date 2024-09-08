@@ -79,4 +79,4 @@ const totalGastos = administracion.gastos.reduce((acc, gasto) => acc + gasto.mon
 
 const resultadoFinal = recaudacionTotal - totalGastos;
 
-console.log('El resultado final es:', resultadoFinal,'de la recaudacion ',administracion.titulo);
+// console.log('El resultado final es:', resultadoFinal,'de la recaudacion ',administracion.titulo);
