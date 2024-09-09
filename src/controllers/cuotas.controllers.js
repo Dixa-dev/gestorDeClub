@@ -3,7 +3,7 @@ const prisma = new PrismaClient();
 
 export const crearCuota = async (req, res) => {
   const { mes, monto, fechaPago, comprobantePago, jugadorId  } = req.body;
-console.log(req.body);
+
   try {
 
     if (!mes || !monto || !fechaPago || !comprobantePago || !jugadorId) {
@@ -19,7 +19,10 @@ console.log(req.body);
         ]
       }
     })
-console.log(cuotas);
+    if(cuotas.mes === req.body.mes) {
+      return res.status(409).json({ message: 'Ya existe una cuota con esos datos' });
+    }
+
 
    
     const cuotaCreada = await prisma.cuotas.create({

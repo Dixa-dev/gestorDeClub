@@ -2,13 +2,17 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export const tortaJugadoresCuotas = async (req, res) => {
-  try {
-    const mes = "Enero"; // Puedes ajustar esto según lo que necesites
 
-    // Contar el número total de jugadores
+     
+  try {
+
+    const {mes} = req.body;
+    // const mes = "Enero"
+
+    
     const totalJugadores = await prisma.jugadores.count();
 
-    // Contar el número de jugadores que han pagado en el mes especificado
+  
     const jugadoresQuePagaron = await prisma.cuotas.count({
       where: {
         mes: mes,
@@ -16,7 +20,7 @@ export const tortaJugadoresCuotas = async (req, res) => {
       },
     });
 
-    // Contar los jugadores únicos que han pagado
+    
     const jugadoresUnicosQuePagaron = await prisma.cuotas.groupBy({
       by: ['jugadorId'],
       where: {
@@ -28,10 +32,10 @@ export const tortaJugadoresCuotas = async (req, res) => {
       },
     });
 
-    // Contar el número de jugadores que no han pagado
+   
     const jugadoresNoPagaron = totalJugadores - jugadoresUnicosQuePagaron.length;
 
-    // Formatear los datos para el frontend
+   
     const data = [
       { name: 'Pagaron', value: jugadoresUnicosQuePagaron.length },
       { name: 'No Pagaron', value: jugadoresNoPagaron },

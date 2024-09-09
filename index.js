@@ -28,7 +28,7 @@ app.use("/api/cuotas",cuotasRoutes);
 app.use("/api/administracion",adminRoutes);
 app.use("/api/gastos",gastosRoutes)
 app.use("/api/suma", sumaRoutes);
-app.use("/api/estadisticas",estasdisticasRoutes)
+app.use("/api/estadisticas",verificarRole,estasdisticasRoutes)
 
 app.get("/", (req, res) => {
   res.send("Hola, este es el inicio de la API");
