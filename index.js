@@ -10,6 +10,7 @@ import estasdisticasRoutes from "./src/routes/estadisticas.routes.js"
 import { config } from 'dotenv';
 
 import {  verificarRole } from './src/middlewares/rutasProtegidas.js';
+import { protegidoAdmin } from './src/middlewares/usuariosRoles.js';
 // verificarRole(['SUPER', 'ADMIN'])
 
 
@@ -28,7 +29,7 @@ app.use("/api/cuotas",cuotasRoutes);
 app.use("/api/administracion",adminRoutes);
 app.use("/api/gastos",gastosRoutes)
 app.use("/api/suma", sumaRoutes);
-app.use("/api/estadisticas",estasdisticasRoutes)
+app.use("/api/estadisticas",protegidoAdmin,estasdisticasRoutes)
 
 app.get("/", (req, res) => {
   res.send("Hola, este es el inicio de la API");
