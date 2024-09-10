@@ -16,11 +16,19 @@ export const crearCuota = async (req, res) => {
       return res.status(400).json({ message: "Faltan datos requeridos" });
     }
 
-    const cuotas = await prisma.cuotas.findFirst({
+    const cuotaExistente = await prisma.cuotas.findFirst({
       where: {
-        OR: [{ mes }, { comprobantePago }, { jugadorId }],
+        jugadorId: jugadorId,
+        mes: mes
       },
     });
+
+    // Si existe una cuota en ese mes y año para ese jugador, no permitir crear otra
+    if (cuotaExistente) {
+      return res.status(400).json({
+        message: "Ya existe una cuota registrada para este jugador en el mismo mes o año.",
+      });
+    }
 
     
     const cuotaCreada = await prisma.cuotas.create({
