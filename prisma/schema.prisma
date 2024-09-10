@@ -24,30 +24,34 @@ model Jugadores {
   fechaNacimiento   String
   categoria         Categorias
   cuotas            Cuotas[]
+  createAd        DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   @@map("jugadores")
 }
 
 model Cuotas {
   id              Int        @id @default(autoincrement())
+  anio            String
   mes             String
   monto           Int
   fechaPago       String
   jugador         Jugadores? @relation(fields: [jugadorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   jugadorId       Int
   comprobantePago String     @unique
-  
-
+  createAd        DateTime @default(now())
+  updatedAt       DateTime @updatedAt
   @@map("cuotas")
 }
 
 model Administracion {
   id                         Int      @id @default(autoincrement())
   titulo                     String
-  recaudacionEntadas         Int
+  recaudacionEntradas         Int
   recaudacionEstacionamiento Int
   gastos                     Gastos[]
-
+  createAd        DateTime @default(now())
+  updatedAt       DateTime @updatedAt
   @@map("administracion")
 }
 
@@ -57,7 +61,8 @@ model Gastos {
   monto            Int
   administracion   Administracion? @relation(fields: [administracionId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   administracionId Int
-
+  createAd        DateTime @default(now())
+  updatedAt       DateTime @updatedAt
   @@map("gastos")
 }
 

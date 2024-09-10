@@ -3,16 +3,16 @@ const prisma = new PrismaClient();
 
 export const crearFecha = async (req, res) => {
   try {
-    const { titulo, recaudacionEntadas, recaudacionEstacionamiento } = req.body;
+    const { titulo, recaudacionEntradas, recaudacionEstacionamiento } = req.body;
 
-    if (!titulo || !recaudacionEntadas || !recaudacionEstacionamiento) {
+    if (!titulo || !recaudacionEntradas || !recaudacionEstacionamiento) {
       return res.status(400).json({ message: "Faltan datos requeridos" });
     }
 
     const admiPartido = await prisma.administracion.create({
       data: {
         titulo: titulo,
-        recaudacionEntadas,
+        recaudacionEntradas,
         recaudacionEstacionamiento,
       },
     });
@@ -72,11 +72,11 @@ const administracion = await prisma.administracion.findUnique({
 });
 
 
-const recaudacionTotal = administracion.recaudacionEntadas + administracion.recaudacionEstacionamiento;
+// const recaudacionTotal = administracion.recaudacionEntradas + administracion.recaudacionEstacionamiento;
 
 
-const totalGastos = administracion.gastos.reduce((acc, gasto) => acc + gasto.monto, 0);
+// const totalGastos = administracion.gastos.reduce((acc, gasto) => acc + gasto.monto, 0);
 
-const resultadoFinal = recaudacionTotal - totalGastos;
+// const resultadoFinal = recaudacionTotal - totalGastos;
 
 // console.log('El resultado final es:', resultadoFinal,'de la recaudacion ',administracion.titulo);

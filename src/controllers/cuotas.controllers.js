@@ -2,61 +2,55 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export const crearCuota = async (req, res) => {
-  const { mes, monto, fechaPago, comprobantePago, jugadorId  } = req.body;
+  const { anio, mes, monto, fechaPago, comprobantePago, jugadorId } = req.body;
 
   try {
-
-    if (!mes || !monto || !fechaPago || !comprobantePago || !jugadorId) {
-      return res.status(400).json({ message: 'Faltan datos requeridos' });
+    if (
+      !anio ||
+      !mes ||
+      !monto ||
+      !fechaPago ||
+      !comprobantePago ||
+      !jugadorId
+    ) {
+      return res.status(400).json({ message: "Faltan datos requeridos" });
     }
-    
+
     const cuotas = await prisma.cuotas.findFirst({
       where: {
-        OR: [
-          { mes },
-          { comprobantePago },
-          { jugadorId}
-        ]
-      }
-    })
-    if(cuotas.mes === req.body.mes) {
-      return res.status(409).json({ message: 'Ya existe una cuota con esos datos' });
-    }
-
-
-   
-    const cuotaCreada = await prisma.cuotas.create({
-      data: {
-        mes:mes,
-        monto:monto,
-        fechaPago:fechaPago,
-        comprobantePago:comprobantePago,
-        jugador: { connect: { id: jugadorId} },
-      }
+        OR: [{ mes }, { comprobantePago }, { jugadorId }],
+      },
     });
 
     
+    const cuotaCreada = await prisma.cuotas.create({
+      data: {
+        anio,
+        mes,
+        monto,
+        fechaPago,
+        comprobantePago,
+        jugador: { connect: { id: jugadorId } },
+      },
+    });
+
     res.status(201).json(cuotaCreada);
   } catch (error) {
-
     res.status(400).json({ message: error.message });
   }
-  
 };
-
 
 export const obtenerCuotas = async (req, res) => {
   try {
     const cuotas = await prisma.cuotas.findMany({
       include: {
-        jugador: true, 
+        jugador: true,
       },
     });
     res.status(200).json(cuotas);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
- 
 };
 
 export const obtenerCuotaPorId = async (req, res) => {
@@ -68,19 +62,9 @@ export const obtenerCuotaPorId = async (req, res) => {
     include: {
       jugador: true,
     },
-
-  })
+  });
   if (!cuotas) {
-    return res.status(404).json({ message: 'Cuota no encontrada' });
+    return res.status(404).json({ message: "Cuota no encontrada" });
   }
   res.status(200).json(cuotas);
-}
-
-
-
-
-
-
-
-
-
+};
