@@ -31,6 +31,7 @@ export const crearCuota = async (req, res) => {
     }
 
     
+  
     const cuotaCreada = await prisma.cuotas.create({
       data: {
         anio,

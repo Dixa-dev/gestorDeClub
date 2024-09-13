@@ -1,6 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
+
+
 export const crearFecha = async (req, res) => {
   try {
     const { titulo, recaudacionEntradas, recaudacionEstacionamiento } = req.body;
@@ -47,15 +49,15 @@ export const obtenerFechaId = async (req, res) => {
 export const administraciones = async (req, res) => {
 
   try {
-    const administraciones = await prisma.administracion.findMany({
+    const administracion = await prisma.administracion.findMany({
       include: {
         gastos: true,
       },
     })
-    if (!administraciones) {
+    if (!administracion) {
       return res.status(404).json({ message: "No hay fechas registradas" });
     }
-    res.json(administraciones)
+    res.json(administracion)
   } catch (error) {
     res.status(404).json({ error: error });
   }
@@ -64,7 +66,7 @@ export const administraciones = async (req, res) => {
 
 const administracion = await prisma.administracion.findUnique({
   where: {
-    id: 3, 
+    id: 4, 
   },
   include: {
     gastos: true, 
@@ -72,11 +74,12 @@ const administracion = await prisma.administracion.findUnique({
 });
 
 
-// const recaudacionTotal = administracion.recaudacionEntradas + administracion.recaudacionEstacionamiento;
+const recaudacionTotal = administracion.recaudacionEntradas + administracion.recaudacionEstacionamiento;
 
 
-// const totalGastos = administracion.gastos.reduce((acc, gasto) => acc + gasto.monto, 0);
+ const totalGastos = administracion.gastos.reduce((acc, gasto) => acc + gasto.monto, 0);
 
-// const resultadoFinal = recaudacionTotal - totalGastos;
+ const resultadoFinal = recaudacionTotal - totalGastos;
 
-// console.log('El resultado final es:', resultadoFinal,'de la recaudacion ',administracion.titulo);
+ console.log('El resultado final es:', resultadoFinal,'de la recaudacion ',administracion.titulo);
+
