@@ -24,6 +24,7 @@ export const obtenerJugadorPorId = async (req, res) => {
   if (!jugador) {
     return res.status(404).json({ message: "Jugador no encontrado" });
   }
+
   res.json(jugador);
 };
 
@@ -101,7 +102,7 @@ export const eliminarJugador = async (req, res) => {
     });
     if (!eliminarJugador) {
       return res.status(404).json({ message: "Jugador no encontrado" });
-    }
+    }zz
     res.json(eliminarJugador);
   } catch (error) {
     return res.status(404).json({ message: "Jugador no eliminado" });

@@ -1,4 +1,3 @@
-
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["driverAdapters"]
@@ -19,8 +18,8 @@ model Jugadores {
   fechaNacimiento   String
   categoria         Categorias
   cuotas            Cuotas[]
-  createAd        DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  createAd          DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
 
   @@map("jugadores")
 }
@@ -34,30 +33,46 @@ model Cuotas {
   jugador         Jugadores? @relation(fields: [jugadorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   jugadorId       Int
   comprobantePago String     @unique
-  createAd        DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  createAd        DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
   @@map("cuotas")
 }
 
-model Administracion {
-  id                         Int      @id @default(autoincrement())
-  titulo                     String
-  recaudacionEntradas         Int
+model Eventos {
+  id        Int      @id @default(autoincrement())
+  titulo    String
+  gastos    Gastos[]
+  recaudacion Recaudacion[]
+  createAd  DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("eventos")
+}
+
+model Recaudacion {
+  id                         Int @id @default(autoincrement())
+  evento Eventos? @relation(fields: [eventoId], references: [id], onDelete:Cascade, onUpdate: Cascade)
+  eventoId Int
+  reciboInicial Int
+  reciboFinal   Int
+  recaudacionEntradas        Int
   recaudacionEstacionamiento Int
-  gastos                     Gastos[]
-  createAd        DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  @@map("administracion")
+  createAd  DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@map("recaudacion")
 }
 
 model Gastos {
-  id               Int            @id @default(autoincrement())
+  id               Int      @id @default(autoincrement())
   descripcion      String
   monto            Int
-  administracion   Administracion? @relation(fields: [administracionId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  administracionId Int
-  createAd        DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  evento           Eventos?  @relation(fields: [eventoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  eventoId         Int
+  createAd         DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
   @@map("gastos")
 }
 

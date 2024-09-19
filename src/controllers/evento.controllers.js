@@ -1,3 +1,4 @@
+
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
@@ -5,21 +6,20 @@ const prisma = new PrismaClient();
 
 export const crearFecha = async (req, res) => {
   try {
-    const { titulo, recaudacionEntradas, recaudacionEstacionamiento } = req.body;
+    const { titulo } = req.body;
 
-    if (!titulo || !recaudacionEntradas || !recaudacionEstacionamiento) {
+    if (!titulo ) {
       return res.status(400).json({ message: "Faltan datos requeridos" });
     }
 
-    const admiPartido = await prisma.administracion.create({
+    const eventoPartido = await prisma.eventos.create({
       data: {
         titulo: titulo,
-        recaudacionEntradas,
-        recaudacionEstacionamiento,
+        
       },
     });
 
-    return res.json(admiPartido);
+    return res.json(eventoPartido);
   } catch (error) {
     return res.status(404).json({ error: error });
   }
@@ -29,7 +29,7 @@ export const obtenerFechaId = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const fecha = await prisma.administracion.findUnique({
+    const fecha = await prisma.eventos.findUnique({
       where: {
         id: Number(id),
       },
@@ -46,25 +46,25 @@ export const obtenerFechaId = async (req, res) => {
   }
 };
 
-export const administraciones = async (req, res) => {
+export const obtenerTodos = async (req, res) => {
 
   try {
-    const administracion = await prisma.administracion.findMany({
+    const eventos = await prisma.eventos.findMany({
       include: {
         gastos: true,
       },
     })
-    if (!administracion) {
+    if (!eventos) {
       return res.status(404).json({ message: "No hay fechas registradas" });
     }
-    res.json(administracion)
+    res.json(eventos)
   } catch (error) {
     res.status(404).json({ error: error });
   }
 }
 
 
-const administracion = await prisma.administracion.findUnique({
+const evento = await prisma.eventos.findUnique({
   where: {
     id: 4, 
   },
@@ -74,12 +74,12 @@ const administracion = await prisma.administracion.findUnique({
 });
 
 
-const recaudacionTotal = administracion.recaudacionEntradas + administracion.recaudacionEstacionamiento;
+// const recaudacionTotal = evento.recaudacionEntradas + evento.recaudacionEstacionamiento;
 
 
- const totalGastos = administracion.gastos.reduce((acc, gasto) => acc + gasto.monto, 0);
+//  const totalGastos = evento.gastos.reduce((acc, gasto) => acc + gasto.monto, 0);
 
- const resultadoFinal = recaudacionTotal - totalGastos;
+//  const resultadoFinal = recaudacionTotal - totalGastos;
 
- console.log('El resultado final es:', resultadoFinal,'de la recaudacion ',administracion.titulo);
+//  console.log('El resultado final es:', resultadoFinal,'de la recaudacion ',evento.titulo);
 
