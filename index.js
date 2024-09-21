@@ -23,9 +23,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const corsOptions = {
+  origin: ['http://localhost:3000', 'https://gestor-de-club.vercel.app'], // Dominios permitidos
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Métodos HTTP permitidos
+  credentials: true, // Si necesitas permitir cookies o autenticación
+};
+
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/docs",swaggerUi.serve ,swaggerUi.setup(specs))
+app.use("/api/docs",cors(corsOptions),swaggerUi.serve ,swaggerUi.setup(specs))
 app.use("/api/login", usuariosRoutes);
 app.use("/api/usuarios",usuariosRoutes);
 app.use("/api/jugadores",jugadoresRoutes);
