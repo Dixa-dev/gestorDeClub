@@ -1,4 +1,6 @@
 import express from 'express';
+import swaggerUi from 'swagger-ui-express';
+import specs from './swagger/swagger.js';
 import cors from 'cors';
 import jugadoresRoutes from "./src/routes/jugadores.routes.js"
 import cuotasRoutes from "./src/routes/cuotas.routes.js"
@@ -11,6 +13,7 @@ import estasdisticasRoutes from "./src/routes/estadisticas.routes.js"
 import { config } from 'dotenv';
 
 import { protegidoAdmin } from './src/middlewares/usuariosRoles.js';
+
 // verificarRole(['SUPER', 'ADMIN'])
 
 
@@ -19,9 +22,10 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
 app.use(express.urlencoded({ extended: true }));
 
-
+app.use("/api/docs",swaggerUi.serve ,swaggerUi.setup(specs))
 app.use("/api/login", usuariosRoutes);
 app.use("/api/usuarios",usuariosRoutes);
 app.use("/api/jugadores",jugadoresRoutes);

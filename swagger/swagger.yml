@@ -1,0 +1,96 @@
+openapi: 3.0.0
+info:
+  title: Gestor API
+  version: 1.0.0
+  description: Api gestión de Club
+  contact:
+    name: DIXA
+servers:
+  - url: http://localhost:3000
+    description: Local server
+  - url: https://gestor-de-club.vercel.app
+    description: Producción server
+
+components:
+  schemas:
+    Jugador:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the jugador
+          example: 1
+        nombre:
+          type: string
+          description: First name of the jugador
+          example: "Juan"
+        apellido:
+          type: string
+          description: Last name of the jugador
+          example: "Perez"
+        dni:
+          type: string
+          description: Unique DNI of the jugador
+          example: "12345678"
+        celular:
+          type: string
+          description: Cellphone number of the jugador
+          example: "555-1234"
+        celularEmergencia:
+          type: string
+          description: Emergency contact number for the jugador
+          example: "555-5678"
+        fechaNacimiento:
+          type: string
+          format: date
+          description: Birthdate of the jugador
+          example: "1990-01-01"
+        categoria:
+          $ref: '#/components/schemas/Categoria'
+          type: string
+          format: date-time
+          description: Creation timestamp
+          example: "2023-09-20T12:00:00Z"
+      updatedAt:
+          type: string
+          format: date-time
+          description: Last update timestamp
+          example: "2023-09-20T12:00:00Z"
+    Categoria:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the categoria
+          example: 1
+        nombre:
+          type: string
+          description: Name of the categoria
+          example: "Senior"
+
+    
+
+paths:
+  /api/jugadores:
+    get:
+      summary: Get list of jugadores
+      responses:
+        '200':
+          description: A list of jugadores
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Jugador'
+
+    post:
+      summary: Create a new jugador
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Jugador'
+      responses:
+        '201':
+          description: Jugador created successfully

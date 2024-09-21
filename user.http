@@ -1,0 +1,22 @@
+@api = https://gestor-de-club.vercel.app/api
+
+
+GET {{api}}/jugadores/1
+
+
+
+
+###
+POST https://gestor-de-club.vercel.app/api/jugadores
+Content-Type: application/json
+
+{
+
+  "nombre":"Daniel",
+  "apellido": "Fernandez",
+  "dni": "444445",
+  "celular": "2616095070",
+  "celularEmergencia": "2616095070",
+  "categoria":"VETERANO",
+  "fechaNacimiento": "34343"
+}

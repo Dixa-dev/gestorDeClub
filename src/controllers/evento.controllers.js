@@ -35,6 +35,7 @@ export const obtenerFechaId = async (req, res) => {
       },
       include: {
         gastos: true,
+        recaudacion: true,
       },
     });
     if (!fecha) {
