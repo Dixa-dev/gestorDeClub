@@ -2,6 +2,15 @@
 
 
 GET {{api}}/jugadores/1
+###
+GET {{api}}/cuotas
+###
+GET {{api}}/eventos
+###
+GET {{api}}/gastos
+###
+GET {{api}}/recaudacion
+
 
 
 

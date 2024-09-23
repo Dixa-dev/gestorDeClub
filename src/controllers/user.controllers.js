@@ -44,7 +44,7 @@ export const login = async (req, res) => {
     }
 
     if (usuario.nombre === nombre && usuario.password === password) {
-      return res.status(200).json(usuario);
+      return res.status(200).json({ message: "login success", usuario });
     } else {
       return res
         .status(401)

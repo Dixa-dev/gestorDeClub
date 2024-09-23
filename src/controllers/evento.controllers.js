@@ -46,7 +46,6 @@ export const obtenerFechaId = async (req, res) => {
      res.status(404).json({ error: error });
   }
 };
-
 export const obtenerTodos = async (req, res) => {
 
   try {
