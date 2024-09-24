@@ -16,6 +16,7 @@ export const obtenerJugadorPorId = async (req, res) => {
   const jugador = await prisma.jugadores.findUnique({
     where: {
       id: Number(id),
+    
     },
     include: {
       cuotas: true,
@@ -36,7 +37,7 @@ export const crearJugador = async (req, res) => {
     celular,
     fechaNacimiento,
     celularEmergencia,
-    categoria,
+    categoria
   } = req.body;
 
   try {

@@ -23,7 +23,7 @@ export const crearCuota = async (req, res) => {
       },
     });
 
-    // Si existe una cuota en ese mes y año para ese jugador, no permitir crear otra
+    // ?Si existe una cuota en ese mes y año para ese jugador, no permitir crear otra
     if (cuotaExistente) {
       return res.status(400).json({
         message: "Ya existe una cuota registrada para este jugador en el mismo mes o año.",

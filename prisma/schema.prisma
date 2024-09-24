@@ -86,7 +86,7 @@ model Usuarios {
 }
 
 enum Categorias {
-  C7
+  C7 
   C9
   C11
   C13
