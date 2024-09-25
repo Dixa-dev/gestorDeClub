@@ -12,8 +12,7 @@ import gastosRoutes from "./src/routes/gastos.routes.js"
 import estasdisticasRoutes from "./src/routes/estadisticas.routes.js"
 import { config } from 'dotenv';
 
-
-import { verificarRole } from './src/middlewares/rutasProtegidas.js';
+import { protegidoAdmin, protegidoCobradores } from './src/middlewares/usuariosRoles.js';
 
 // verificarRole(['SUPER', 'ADMIN'])
 
@@ -35,7 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/docs",cors(corsOptions),swaggerUi.serve ,swaggerUi.setup(specs))
 app.use("/api/login", usuariosRoutes);
 app.use("/api/usuarios",usuariosRoutes);
-app.use("/api/jugadores",verificarRole(['SUPER', 'ADMIN','COBRADOR']),jugadoresRoutes);
+app.use("/api/jugadores",jugadoresRoutes);
 app.use("/api/cuotas",cuotasRoutes);
 app.use("/api/eventos",eventoRoutes);
 app.use("/api/gastos",gastosRoutes)
