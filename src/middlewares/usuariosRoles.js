@@ -46,6 +46,7 @@ export const protegerRutaPorRol = (rolesPermitidos) => {
 };
 
 
+
 export const protegidoCobradores = protegerRutaPorRol(["COBRADOR"]);
 export const protegidoSuperes = protegerRutaPorRol(["SUPER","ADMIN","COBRADOR"]);
 export const protegidoAdmin = protegerRutaPorRol(["ADMIN"]);

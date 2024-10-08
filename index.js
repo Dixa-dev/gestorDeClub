@@ -34,7 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/docs",cors(corsOptions),swaggerUi.serve ,swaggerUi.setup(specs))
 app.use("/api/login", usuariosRoutes);
 app.use("/api/usuarios",usuariosRoutes);
-app.use("/api/jugadores",jugadoresRoutes);
+app.use("/api/jugadores",protegidoCobradores,jugadoresRoutes);
 app.use("/api/cuotas",cuotasRoutes);
 app.use("/api/eventos",eventoRoutes);
 app.use("/api/gastos",gastosRoutes)
