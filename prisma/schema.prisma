@@ -40,38 +40,37 @@ model Cuotas {
 }
 
 model Eventos {
-  id        Int      @id @default(autoincrement())
-  titulo    String
-  gastos    Gastos[]
+  id          Int           @id @default(autoincrement())
+  titulo      String
+  gastos      Gastos[]
   recaudacion Recaudacion[]
-  createAd  DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createAd    DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
 
   @@map("eventos")
 }
 
 model Recaudacion {
-  id                         Int @id @default(autoincrement())
-  evento Eventos? @relation(fields: [eventoId], references: [id], onDelete:Cascade, onUpdate: Cascade)
-  eventoId Int
+  id            Int      @id @default(autoincrement())
+  nombre        String
+  evento        Eventos? @relation(fields: [eventoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  eventoId      Int
   reciboInicial Int
   reciboFinal   Int
-  recaudacionEntradas        Int
-  recaudacionEstacionamiento Int
-  createAd  DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  
+  createAd      DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
   @@map("recaudacion")
 }
 
 model Gastos {
-  id               Int      @id @default(autoincrement())
-  descripcion      String
-  monto            Int
-  evento           Eventos?  @relation(fields: [eventoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  eventoId         Int
-  createAd         DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  nombre    String
+  monto     Int
+  evento    Eventos? @relation(fields: [eventoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  eventoId  Int
+  createAd  DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("gastos")
 }
@@ -86,7 +85,7 @@ model Usuarios {
 }
 
 enum Categorias {
-  C7 
+  C7
   C9
   C11
   C13

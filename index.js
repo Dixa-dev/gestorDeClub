@@ -12,7 +12,7 @@ import gastosRoutes from "./src/routes/gastos.routes.js"
 import estasdisticasRoutes from "./src/routes/estadisticas.routes.js"
 import { config } from 'dotenv';
 
-import { protegidoAdmin, protegidoCobradores } from './src/middlewares/usuariosRoles.js';
+import { protegidoAdmin, protegidoCobradores, protegidoSuperes } from './src/middlewares/usuariosRoles.js';
 
 // verificarRole(['SUPER', 'ADMIN'])
 
@@ -24,7 +24,7 @@ app.use(cors());
 app.use(express.json());
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://gestor-de-club.vercel.app'], // Dominios permitidos
+  origin: ['http://localhost:3000', 'https://gestor-de-club.vercel.app'], 
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Métodos HTTP permitidos
   credentials: true, // Si necesitas permitir cookies o autenticación
 };
@@ -34,7 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/docs",cors(corsOptions),swaggerUi.serve ,swaggerUi.setup(specs))
 app.use("/api/login", usuariosRoutes);
 app.use("/api/usuarios",usuariosRoutes);
-app.use("/api/jugadores",jugadoresRoutes);
+app.use("/api/jugadores",protegidoAdmin,jugadoresRoutes);
 app.use("/api/cuotas",cuotasRoutes);
 app.use("/api/eventos",eventoRoutes);
 app.use("/api/gastos",gastosRoutes)
@@ -44,8 +44,9 @@ app.use("/api/estadisticas",estasdisticasRoutes)
 
 app.get("/", (req, res) => {
   res.send("Hola, este es el inicio de la API");
-});
 
-app.listen(3000);
-console.log("Server listening on,3000");
+
+});
+app.listen( process.env.PORT );
+console.log("Server listening on");
 

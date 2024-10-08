@@ -28,6 +28,8 @@ export const verificarRole = (rolesPermitidos) => {
       }
 
       if (rolesPermitidos.includes(usuario.role)) {
+        console.log(usuario.role);
+        
         return next();
       } else {
         return res.status(403).json({ message: "No tiene permiso para acceder a esta ruta" });

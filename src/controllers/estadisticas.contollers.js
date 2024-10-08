@@ -7,7 +7,7 @@ export const tortaJugadoresCuotas = async (req, res) => {
   try {
 
     const {mes} = req.body;
-    // const mes = "Enero"
+    //? const mes = "Enero"
 
     
     const totalJugadores = await prisma.jugadores.count();
