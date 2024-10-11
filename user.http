@@ -1,7 +1,7 @@
 @api = https://gestor-de-club.vercel.app/api
 
 
-GET {{api}}/jugadores/1
+GET {{api}}/jugadores
 ###
 GET {{api}}/cuotas
 ###
@@ -23,7 +23,7 @@ Content-Type: application/json
 
   "nombre":"Daniel",
   "apellido": "Fernandez",
-  "dni": "444445",
+  "dni": "44444",
   "celular": "2616095070",
   "celularEmergencia": "2616095070",
   "categoria":"VETERANO",

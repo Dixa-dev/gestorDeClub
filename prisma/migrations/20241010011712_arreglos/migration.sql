@@ -48,11 +48,10 @@ CREATE TABLE "eventos" (
 -- CreateTable
 CREATE TABLE "recaudacion" (
     "id" SERIAL NOT NULL,
+    "nombre" TEXT NOT NULL,
     "eventoId" INTEGER NOT NULL,
     "reciboInicial" INTEGER NOT NULL,
     "reciboFinal" INTEGER NOT NULL,
-    "recaudacionEntradas" INTEGER NOT NULL,
-    "recaudacionEstacionamiento" INTEGER NOT NULL,
     "createAd" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -62,7 +61,7 @@ CREATE TABLE "recaudacion" (
 -- CreateTable
 CREATE TABLE "gastos" (
     "id" SERIAL NOT NULL,
-    "descripcion" TEXT NOT NULL,
+    "nombre" TEXT NOT NULL,
     "monto" INTEGER NOT NULL,
     "eventoId" INTEGER NOT NULL,
     "createAd" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

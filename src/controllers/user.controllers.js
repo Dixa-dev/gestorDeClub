@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
@@ -5,9 +6,11 @@ export const obtenerUsuarios = async (req, res) => {
   try {
     const usuarios = await prisma.usuarios.findMany();
     res.json(usuarios);
-  } catch (error) {}
+  } catch (error) {
   return res.status(200);
-};
+}
+}
+;
 
 export const obtenerUsuariosId = async (req, res) => {
   const { id } = req.params;
@@ -23,7 +26,9 @@ export const obtenerUsuariosId = async (req, res) => {
   }
 
   res.json(usuario);
-};
+}
+
+
 
 export const login = async (req, res) => {
   try {
@@ -36,6 +41,7 @@ export const login = async (req, res) => {
     const usuario = await prisma.usuarios.findFirst({
       where: {
         nombre: nombre,
+        password: password
       },
     });
 
@@ -43,14 +49,26 @@ export const login = async (req, res) => {
       return res.status(404).json({ message: "Usuario no encontrado login" });
     }
 
+
     if (usuario.nombre === nombre && usuario.password === password) {
-      return res.status(200).json({ message: "login success", usuario });
-    } else {
-      return res
-        .status(401)
-        .json({ message: "Credenciales incorrectas login" });
-    }
+      
+    };
+
+      const token = jwt.sign(
+        {
+          nombre: usuario.nombre,
+          password: usuario.password,
+          role: usuario.role,
+        },
+        "12345",
+        { expiresIn: "1h" }
+      );
+      return res.status(200).json({
+        message: "login success",
+        token,
+      })
+    
   } catch (error) {
     return res.status(500).json({ message: "Error del servidor login" });
   }
-};
+}
