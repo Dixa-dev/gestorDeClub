@@ -1,4 +1,6 @@
 import { Router } from "express";
+import jwt from "../../src/middlewares/jwt.js"
+import { verificarCobrador } from "../../src/middlewares/jwt.js";
 import * as jugadores from "../controllers/jugadores.controllers.js";
 
 const router = Router();
@@ -69,14 +71,14 @@ const router = Router();
  *                 $ref: '#/components/schemas/Jugador'
  */
 
-router.get("/:id", jugadores.obtenerJugadorPorId);
+router.get("/:id",jwt,verificarCobrador, jugadores.obtenerJugadorPorId);
 
-router.post("/registro", jugadores.crearJugador);
+router.post("/", jugadores.crearJugador);
 
-router.put("/:id", jugadores.actualizarJugador);
+router.put("/:id",jwt,verificarCobrador, jugadores.actualizarJugador);
 
-router.get("/", jugadores.obtenerTodosJugadores);
+router.get("/",jwt,verificarCobrador, jugadores.obtenerTodosJugadores);
 
-router.delete("/:id", jugadores.eliminarJugador);
+router.delete("/:id",jwt,verificarCobrador, jugadores.eliminarJugador);
 
 export default router;
