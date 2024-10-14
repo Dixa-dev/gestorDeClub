@@ -52,6 +52,7 @@ export const obtenerTodos = async (req, res) => {
     const eventos = await prisma.eventos.findMany({
       include: {
         gastos: true,
+        recaudacion: true,
       },
     })
     if (!eventos) {

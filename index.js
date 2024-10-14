@@ -8,6 +8,7 @@ import sumaRoutes from "./src/routes/suma.routes.js"
 import eventoRoutes from "./src/routes/evento.routes.js"
 import recaudacionRoutes from "./src/routes/recaudacion.routes.js"
 import usuariosRoutes from "./src/routes/user.routes.js"
+
 import gastosRoutes from "./src/routes/gastos.routes.js"
 import estasdisticasRoutes from "./src/routes/estadisticas.routes.js"
 import jwt from "./src/middlewares/jwt.js"
@@ -35,7 +36,7 @@ app.use("/api/docs",cors(corsOptions),swaggerUi.serve ,swaggerUi.setup(specs))
 app.use("/api/login", usuariosRoutes);
 app.use("/api/usuarios",usuariosRoutes);
 app.use("/api/jugadores",jwt,verificarCobrador,jugadoresRoutes);
-app.use("/api/cuotas",verificarCobrador,cuotasRoutes);
+app.use("/api/cuotas",cuotasRoutes);
 app.use("/api/eventos",eventoRoutes);
 app.use("/api/gastos",gastosRoutes)
 app.use("/api/recaudacion",recaudacionRoutes)
@@ -47,7 +48,8 @@ app.get("/", (req, res) => {
 
 
 });
-app.listen( 3000 );
 console.log("Server listening on");
+app.listen( 3000 );
+
 
 

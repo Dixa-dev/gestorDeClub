@@ -50,9 +50,7 @@ export const login = async (req, res) => {
     }
 
 
-    if (usuario.nombre === nombre && usuario.password === password) {
-      
-    };
+ 
 
       const token = jwt.sign(
         {

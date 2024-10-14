@@ -71,7 +71,7 @@ const router = Router();
 
 router.get("/:id", jugadores.obtenerJugadorPorId);
 
-router.post("/", jugadores.crearJugador);
+router.post("/registro", jugadores.crearJugador);
 
 router.put("/:id", jugadores.actualizarJugador);
 

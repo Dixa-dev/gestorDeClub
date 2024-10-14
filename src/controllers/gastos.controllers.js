@@ -3,11 +3,11 @@ const prisma = new PrismaClient();
 
 export const crearGastos = async (req, res) => {
   try {
-    const { descripcion, monto, eventoId } = req.body;
+    const { nombre, monto, eventoId } = req.body;
 
     const gastos = await prisma.gastos.create({
       data: {
-        descripcion,
+        nombre,
         monto,
         eventoId,
       },
