@@ -4,13 +4,14 @@ const prisma = new PrismaClient();
 
 export const crearRecaudacion = async (req, res) => {
   try {
-    const { reciboInicial, reciboFinal, nombre, eventoId } = req.body;
+    const { reciboInicial, reciboFinal, nombre, eventoId,monto } = req.body;
 
     const recaudacionEvento = await prisma.recaudacion.create({
       data: {
         reciboInicial,
         reciboFinal,
         nombre,
+        monto,
         eventoId,
       },
     });

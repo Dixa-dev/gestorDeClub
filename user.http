@@ -21,9 +21,9 @@ Content-Type: application/json
 
 {
 
-  "nombre":"Daniel",
-  "apellido": "Fernandez",
-  "dni": "44444",
+  "nombre":"Mauri",
+  "apellido":"Gimenez",
+  "dni": "44444544",
   "celular": "2616095070",
   "celularEmergencia": "2616095070",
   "categoria":"VETERANO",
