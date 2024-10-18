@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "balance" ALTER COLUMN "mes" SET DATA TYPE TEXT;

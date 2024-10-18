@@ -8,7 +8,9 @@ import sumaRoutes from "./src/routes/suma.routes.js"
 import eventoRoutes from "./src/routes/evento.routes.js"
 import recaudacionRoutes from "./src/routes/recaudacion.routes.js"
 import usuariosRoutes from "./src/routes/user.routes.js"
-
+ import egresoRoutes from "./src/routes/egresosMensuales.routes.js"
+ import ingresoRoutes from "./src/routes/ingresosMensuales.routes.js"
+ import balanceRoutes from "./src/routes/balance.routes.js"
 import gastosRoutes from "./src/routes/gastos.routes.js"
 import estasdisticasRoutes from "./src/routes/estadisticas.routes.js"
 import jwt from "./src/middlewares/jwt.js"
@@ -40,6 +42,9 @@ app.use("/api/cuotas",cuotasRoutes);
 app.use("/api/eventos",eventoRoutes);
 app.use("/api/gastos",gastosRoutes)
 app.use("/api/recaudacion",recaudacionRoutes)
+app.use("/api/egresosMensuales",egresoRoutes)
+app.use("/api/ingresosMensuales",ingresoRoutes)
+app.use("/api/balance",balanceRoutes)
 app.use("/api/suma", sumaRoutes);
 app.use("/api/estadisticas",estasdisticasRoutes)
 

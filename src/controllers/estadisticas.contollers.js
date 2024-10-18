@@ -13,12 +13,6 @@ export const tortaJugadoresCuotas = async (req, res) => {
     const totalJugadores = await prisma.jugadores.count();
 
   
-    const jugadoresQuePagaron = await prisma.cuotas.count({
-      where: {
-        mes: mes,
-        
-      },
-    });
 
     
     const jugadoresUnicosQuePagaron = await prisma.cuotas.groupBy({
@@ -37,6 +31,7 @@ export const tortaJugadoresCuotas = async (req, res) => {
 
    
     const data = [
+     
       { name: 'Pagaron', value: jugadoresUnicosQuePagaron.length },
       { name: 'No Pagaron', value: jugadoresNoPagaron },
     ];
@@ -50,4 +45,6 @@ export const tortaJugadoresCuotas = async (req, res) => {
   
   
   };
+  
+
   
