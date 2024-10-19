@@ -75,9 +75,9 @@ router.get("/:id",jwt,verificarCobrador, jugadores.obtenerJugadorPorId);
 
 router.post("/", jugadores.crearJugador);
 
-router.put("/:id",jwt,[verificarCobrador,verificarSuper], jugadores.actualizarJugador);
+router.put("/:id",jwt,verificarCobrador, jugadores.actualizarJugador);
 
-router.get("/",jwt,verificarCobrador, jugadores.obtenerTodosJugadores);
+router.get("/",jwt,[verificarCobrador,verificarSuper], jugadores.obtenerTodosJugadores);
 
 router.delete("/:id",jwt,verificarCobrador, jugadores.eliminarJugador);
 

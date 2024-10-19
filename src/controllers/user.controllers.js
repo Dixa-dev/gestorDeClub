@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
+
 export const obtenerUsuarios = async (req, res) => {
   try {
     const usuarios = await prisma.usuarios.findMany();

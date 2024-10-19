@@ -1,6 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
+
+
 export const crearGastos = async (req, res) => {
   try {
     const { nombre, monto, eventoId } = req.body;
