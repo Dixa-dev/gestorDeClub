@@ -103,7 +103,7 @@ export const eliminarJugador = async (req, res) => {
     });
     if (!eliminarJugador) {
       return res.status(404).json({ message: "Jugador no encontrado" });
-    }zz
+    }
     res.json(eliminarJugador);
   } catch (error) {
     return res.status(404).json({ message: "Jugador no eliminado" });
