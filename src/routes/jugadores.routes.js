@@ -1,6 +1,6 @@
 import { Router } from "express";
 import jwt from "../../src/middlewares/jwt.js"
-import { verificarCobrador } from "../../src/middlewares/jwt.js";
+import { verificarCobrador,verificarSuper } from "../../src/middlewares/jwt.js";
 import * as jugadores from "../controllers/jugadores.controllers.js";
 
 const router = Router();
@@ -75,7 +75,7 @@ router.get("/:id",jwt,verificarCobrador, jugadores.obtenerJugadorPorId);
 
 router.post("/", jugadores.crearJugador);
 
-router.put("/:id",jwt,verificarCobrador, jugadores.actualizarJugador);
+router.put("/:id",jwt,[verificarCobrador,verificarSuper], jugadores.actualizarJugador);
 
 router.get("/",jwt,verificarCobrador, jugadores.obtenerTodosJugadores);
 
