@@ -28,7 +28,6 @@ export const verificarRole = (rolesPermitidos) => {
       }
 
       if (rolesPermitidos.includes(usuario.role)) {
-        console.log(usuario.role);
         
         return next();
       } else {

@@ -1,7 +1,17 @@
 @api = https://gestor-de-club.vercel.app/api
+@apijugadores = http://localhost:3000/api/jugadores
+
 
 
 GET {{api}}/jugadores
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJEYW5pZWwiLCJwYXNzd29yZCI6ImRhbmlzbmFrZSIsInJvbGUiOiJTVVBFUiIsImlhdCI6MTcyOTM4MTM2MCwiZXhwIjoxNzI5Mzg0OTYwfQ.iUsIGW6hP_QClnFb0xtXu5BObKHUQjAwKBRHllhqvV0
+
+###
+
+GET {{apijugadores}}
+Authorization: Bearer yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJTYW1pciIsInBhc3N3b3JkIjoic2FtaXJiZWx0cmFuIiwicm9sZSI6IkNPQlJBRE9SIiwiaWF0IjoxNzI5MzgxMjkwLCJleHAiOjE3MjkzODQ4OTB9.Rr2iUc-QRyA6LyM1z7dj_HCxmkcTaU0vJgS-dqyHOOM
+
+
 ###
 GET {{api}}/cuotas
 ###
@@ -11,7 +21,15 @@ GET {{api}}/gastos
 ###
 GET {{api}}/recaudacion
 
+###
+POST {{api}}/login
+Content-Type: application/json
 
+{
+
+  "nombre":"Daniel",
+  "password":"danisnake"
+}
 
 
 
