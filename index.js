@@ -13,11 +13,10 @@ import usuariosRoutes from "./src/routes/user.routes.js"
  import balanceRoutes from "./src/routes/balance.routes.js"
 import gastosRoutes from "./src/routes/gastos.routes.js"
 import estasdisticasRoutes from "./src/routes/estadisticas.routes.js"
-import jwt from "./src/middlewares/jwt.js"
-import { config } from 'dotenv';
-import {verificarCobrador,verificarSuper,verificarAdmin} from "./src/middlewares/jwt.js"
 
-// verificarRole(['SUPER', 'ADMIN'])
+import { config } from 'dotenv';
+
+
 
 
 config()
