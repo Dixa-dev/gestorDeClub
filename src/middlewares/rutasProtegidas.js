@@ -9,11 +9,8 @@ export const verificarRole = (rolesPermitidos) => {
     try {
       const { nombre, password } = req.body;
 
-      if (!nombre || !password) {
-        return res.status(400).json({ message: 'Faltan datos requeridos' });
-      }
 
-      const usuario = await prisma.usuarios.findFirst({
+      const usuario = await prisma.usuarios.findMany({
         where: {
           nombre: nombre,
           password: password
@@ -22,12 +19,15 @@ export const verificarRole = (rolesPermitidos) => {
           role: true
         }
       });
+      console.log(usuario.role);
+      
 
       if (!usuario) {
         return res.status(404).json({ message: "Usuario no encontrado" });
       }
 
       if (rolesPermitidos.includes(usuario.role)) {
+        console.log(usuario.role);
         
         return next();
       } else {

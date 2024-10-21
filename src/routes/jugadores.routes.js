@@ -2,7 +2,7 @@ import { Router } from "express";
 import jwt from "../../src/middlewares/jwt.js"
 import { verificarCobrador,verificarSuper } from "../../src/middlewares/jwt.js";
 import * as jugadores from "../controllers/jugadores.controllers.js";
-import { verificarRole } from "../middlewares/rutasProtegidas.js";
+
 
 const router = Router();
 

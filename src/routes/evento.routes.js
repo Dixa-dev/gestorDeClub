@@ -1,5 +1,7 @@
 import { Router } from "express";
 import * as evento from "../controllers/evento.controllers.js"
+import { verificarRole } from "../middlewares/rutasProtegidas.js";
+import jwt from "../../src/middlewares/jwt.js"
 
 const router = Router();
 

@@ -9,7 +9,7 @@ export const crearFecha = async (req, res) => {
     const { titulo } = req.body;
 
     if (!titulo ) {
-      return res.status(400).json({ message: "Faltan datos requeridos" });
+      return res.status(400).json({ message: "Faltan datos requeridos eventos" });
     }
 
     const eventoPartido = await prisma.eventos.create({
